@@ -10,9 +10,9 @@ import java.util.ArrayList;
 /**
  * Created by abell on 1/16/14.
  */
-public class BypassChallengeListFragment extends ListFragment {
+public class CartListFragment extends ListFragment {
 
-    private static final String TAG = "BypassChallengeListFragment";
+    private static final String TAG = "CartListFragment";
 
     private ArrayList<BurgersDogs> mBurgersDogs;
 

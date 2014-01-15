@@ -14,6 +14,18 @@ public class BurgersDogs {
         this.quantity = quantity;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
