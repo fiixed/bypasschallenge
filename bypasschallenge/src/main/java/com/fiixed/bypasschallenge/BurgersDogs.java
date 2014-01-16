@@ -42,4 +42,8 @@ public class BurgersDogs {
     public void addQuantity() {
         quantity++;
     }
+
+    public void removeQuantity() {
+        quantity--;
+    }
 }

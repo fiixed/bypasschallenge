@@ -1,15 +1,20 @@
 package com.fiixed.bypasschallenge;
 
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -20,24 +25,15 @@ public class CartListFragment extends ListFragment {
 
     private static final String TAG = "CartListFragment";
 
-    private ArrayList<BurgersDogs> mBurgersDogs;
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActivity().setTitle(R.string.listfragment_title);
+        setHasOptionsMenu(true);
         new FetchItemsTask().execute();  //starts the AsyncTask and runs doInBackground()
-
-//        //adding dummy data to ArrayList
-//        mBurgersDogs.add(new BurgersDogs("Cheeseburger", 0, 2.45));
-//        mBurgersDogs.add(new BurgersDogs("Hot dog", 0, 1.45));
-//        mBurgersDogs.add(new BurgersDogs("Baconburger", 3, 3.50));
-
-
-
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,13 +44,13 @@ public class CartListFragment extends ListFragment {
         costTextView.setText("test");
 
 
-
         return v;
     }
 
+
     /*
-    creates background thread
-     */
+        creates background thread
+         */
     private class FetchItemsTask extends AsyncTask<Void,Void,ArrayList<BurgersDogs>> {
         @Override
         protected ArrayList<BurgersDogs> doInBackground(Void... params) {

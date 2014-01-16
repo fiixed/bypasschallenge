@@ -3,7 +3,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:padding="5dp"
+    android:background="@drawable/background_activated">
 
     <TextView
         android:layout_width="wrap_content"
@@ -15,7 +16,7 @@
         android:layout_centerVertical="true"
         android:padding="5dp"
         android:textStyle="bold"
-        android:textColor="#000000"/>
+        android:textColor="#000000" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -24,8 +25,7 @@
         android:src="@drawable/sym_action_add"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="10dp"
-
-        />
+        android:focusable="false"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -36,7 +36,9 @@
         android:layout_toLeftOf="@id/add_imageButton"
         android:layout_centerVertical="true"
         android:textColor="#416090"
-        android:padding="5dp"/>
+        android:padding="5dp" />
+
+
 
 
 </RelativeLayout>

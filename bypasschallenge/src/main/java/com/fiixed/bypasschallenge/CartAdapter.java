@@ -1,6 +1,7 @@
 package com.fiixed.bypasschallenge;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,12 +65,16 @@ public class CartAdapter extends ArrayAdapter<BurgersDogs>  {
         BurgersDogs burgerDog = mData.get(position);
 
         //setting the view to the data we need to display
+
+        holder.add.setFocusableInTouchMode(false);
+        holder.add.setFocusable(false);
         holder.title.setText(burgerDog.getTitle());
         if (burgerDog.getQuantity() < 1) {
             holder.quantity.setText("");
         } else {
             holder.quantity.setText(String.valueOf(burgerDog.getQuantity()));
         }
+
 
 
 
