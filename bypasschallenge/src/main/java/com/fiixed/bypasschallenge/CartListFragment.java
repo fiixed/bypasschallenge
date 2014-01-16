@@ -29,6 +29,7 @@ public class CartListFragment extends ListFragment {
     protected Object mActionMode;
     public int selectedItem = -1;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +44,7 @@ public class CartListFragment extends ListFragment {
         View v = inflater.inflate(R.layout.list_all_items, container, false);
 
         ListView listView = (ListView) v.findViewById(android.R.id.list);
+
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             registerForContextMenu(listView);
         } else {
@@ -103,6 +105,15 @@ public class CartListFragment extends ListFragment {
 
 
         return v;
+    }
+
+    public double updatePrice(ArrayList<BurgersDogs> item) {
+        double total = 0.0;
+
+        // Loop through each object in the array to find its quantity and price, then add these to total
+
+
+        return total;
     }
 
 

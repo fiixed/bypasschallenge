@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -64,10 +65,17 @@ public class CartAdapter extends ArrayAdapter<BurgersDogs>  {
         //get the data from the data array
         BurgersDogs burgerDog = mData.get(position);
 
+        holder.add.setOnClickListener(AddListener);
+
+        Integer myPosition = position;
+        holder.add.setTag(myPosition);
+
         //setting the view to the data we need to display
 
         holder.add.setFocusableInTouchMode(false);
         holder.add.setFocusable(false);
+
+
         holder.title.setText(burgerDog.getTitle());
         if (burgerDog.getQuantity() < 1) {
             holder.quantity.setText("");
@@ -76,11 +84,18 @@ public class CartAdapter extends ArrayAdapter<BurgersDogs>  {
         }
 
 
-
-
         return row;
     }
 
+    View.OnClickListener AddListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Integer viewPosition = (Integer)v.getTag();
+            BurgersDogs b = mData.get(viewPosition);
+            b.addQuantity();
+            notifyDataSetChanged();
+        }
+    };
 
     private static class BurgersDogsHolder {
         public TextView title;

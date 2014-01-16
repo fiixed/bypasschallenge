@@ -9,7 +9,7 @@ public class BurgersDogs {
     private double price;
 
     public BurgersDogs() {
-        quantity = 3;
+
     }
 
 
