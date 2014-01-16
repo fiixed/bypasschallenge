@@ -9,7 +9,7 @@ public class BurgersDogs {
     private double price;
 
     public BurgersDogs() {
-
+        quantity = 3;
     }
 
 
@@ -44,6 +44,6 @@ public class BurgersDogs {
     }
 
     public void removeQuantity() {
-        quantity--;
+        quantity = 0;
     }
 }
