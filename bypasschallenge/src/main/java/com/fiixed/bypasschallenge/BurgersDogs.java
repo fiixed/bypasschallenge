@@ -8,6 +8,10 @@ public class BurgersDogs {
     private int quantity;
     private double price;
 
+    public BurgersDogs() {
+
+    }
+
 
     public BurgersDogs(String title, int quantity, double price) {
         this.title = title;

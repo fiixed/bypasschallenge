@@ -70,17 +70,11 @@ public class CartAdapter extends ArrayAdapter<BurgersDogs>  {
         } else {
             holder.quantity.setText(String.valueOf(burgerDog.getQuantity()));
         }
-       
-
-
 
 
 
         return row;
     }
-
-
-
 
 
     private static class BurgersDogsHolder {
