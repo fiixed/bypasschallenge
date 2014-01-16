@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -18,7 +20,9 @@ public class CartListFragment extends ListFragment {
     private static final String TAG = "CartListFragment";
 
     private ArrayList<BurgersDogs> mBurgersDogs = new ArrayList<BurgersDogs>();
-    private CartAdapter cartAdapter;
+    private TextView mTitleTextView;
+    private TextView mQuantityTextView;
+    private ImageButton mAddImageButton;
 
 
     @Override
@@ -28,21 +32,27 @@ public class CartListFragment extends ListFragment {
 
         //adding dummy data to ArrayList
         mBurgersDogs.add(new BurgersDogs("Cheeseburger", 0, 2.45));
-        mBurgersDogs.add(new BurgersDogs("Hot dog", 1, 1.45));
-        mBurgersDogs.add(new BurgersDogs("Baconburger", 2, 3.50));
+        mBurgersDogs.add(new BurgersDogs("Hot dog", 0, 1.45));
+        mBurgersDogs.add(new BurgersDogs("Baconburger", 3, 3.50));
 
+        //Setup ListView
+        CartAdapter cartAdapter = new CartAdapter(getActivity().getApplicationContext(), R.layout.list_item_burgerdog, mBurgersDogs);
+        setListAdapter(cartAdapter);
 
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        //Setup ListView
-
-        cartAdapter = new CartAdapter(getActivity().getApplicationContext(), R.layout.list_item_burgerdog, mBurgersDogs);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.list_all_items, container, false);
 
 
-        setListAdapter(cartAdapter);
+
+        TextView costTextView = (TextView)v.findViewById(R.id.cost_textView);
+        costTextView.setText("test");
+
+
+
+        return v;
     }
 
     @Override

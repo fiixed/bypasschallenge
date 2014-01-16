@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by abell on 1/16/14.
  */
-public class CartAdapter extends ArrayAdapter<BurgersDogs> {
+public class CartAdapter extends ArrayAdapter<BurgersDogs>  {
 
     Context mContext;
     int mLayoutResourceId;
@@ -52,6 +53,7 @@ public class CartAdapter extends ArrayAdapter<BurgersDogs> {
             //get a reference to all the different view elements we wish to update
             holder.title = (TextView) row.findViewById(R.id.title_textView);
             holder.quantity = (TextView) row.findViewById(R.id.quantity_textView);
+            holder.add = (ImageButton) row.findViewById(R.id.add_imageButton);
             row.setTag(holder);
 
         } else {
@@ -63,15 +65,28 @@ public class CartAdapter extends ArrayAdapter<BurgersDogs> {
 
         //setting the view to the data we need to display
         holder.title.setText(burgerDog.getTitle());
-        holder.quantity.setText(burgerDog.getQuantity());
+        if (burgerDog.getQuantity() < 1) {
+            holder.quantity.setText("");
+        } else {
+            holder.quantity.setText(String.valueOf(burgerDog.getQuantity()));
+        }
+       
+
+
+
 
 
         return row;
     }
 
+
+
+
+
     private static class BurgersDogsHolder {
         public TextView title;
         public TextView quantity;
+        public ImageButton add;
 
     }
 }
