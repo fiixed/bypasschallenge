@@ -88,7 +88,8 @@ public class CartListFragment extends ListFragment {
 
                                 @Override
                                 public void onDestroyActionMode(ActionMode mode) {
-
+                                    mActionMode = null;
+                                    selectedItem = -1;
                                 }
                             });
                     view.setSelected(true);
