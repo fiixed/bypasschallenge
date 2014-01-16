@@ -5,10 +5,11 @@ package com.fiixed.bypasschallenge;
  */
 public class BurgersDogs {
     private String title;
-    private double price;
     private int quantity;
+    private double price;
 
-    public BurgersDogs(String title, double price, int quantity) {
+
+    public BurgersDogs(String title, int quantity, double price) {
         this.title = title;
         this.price = price;
         this.quantity = quantity;
