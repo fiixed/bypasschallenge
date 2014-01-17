@@ -22,12 +22,15 @@ import java.util.ArrayList;
 /**
  * Created by abell on 1/16/14.
  */
-public class CartListFragment extends ListFragment {
+public class CartListFragment extends ListFragment implements CartAdapter.UpdatePriceListener {
 
     private static final String TAG = "CartListFragment";
     protected ArrayList<BurgersDogs> item2;
     protected Object mActionMode;
     public int selectedItem = -1;
+    private TextView costTextView;
+
+
 
 
     @Override
@@ -43,6 +46,9 @@ public class CartListFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.list_all_items, container, false);
 
+        costTextView = (TextView) v.findViewById(R.id.cost_textView);
+
+
         ListView listView = (ListView) v.findViewById(android.R.id.list);
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
@@ -52,7 +58,7 @@ public class CartListFragment extends ListFragment {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                    if(mActionMode != null) {
+                    if (mActionMode != null) {
                         return false;
                     }
                     selectedItem = position;
@@ -78,11 +84,12 @@ public class CartListFragment extends ListFragment {
                                     switch (item.getItemId()) {
                                         case R.id.menu_item_delete_quantity:
                                             burger.removeQuantity();
+                                            updatePrice(item2);
                                             adapter.notifyDataSetChanged();
                                             // the Action was executed, close the CAB
                                             mode.finish();
 
-                                         return true;
+                                            return true;
                                         default:
                                             return false;
                                     }
@@ -100,9 +107,6 @@ public class CartListFragment extends ListFragment {
             });
         }
 
-        TextView costTextView = (TextView) v.findViewById(R.id.cost_textView);
-        costTextView.setText("test");
-
 
         return v;
     }
@@ -111,17 +115,23 @@ public class CartListFragment extends ListFragment {
         double total = 0.0;
 
         // Loop through each object in the array to find its quantity and price, then add these to total
-
+        for (BurgersDogs b : item) {
+            total = total + b.getPrice() * b.getQuantity();
+        }
+        costTextView.setText("$" + String.valueOf(total));
 
         return total;
     }
-
 
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         getActivity().getMenuInflater().inflate(R.menu.cart_list_item_context, menu);
     }
+
+    /**
+     * For pre-Honeycomb devices
+     */
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
@@ -134,6 +144,7 @@ public class CartListFragment extends ListFragment {
         switch (item.getItemId()) {
             case R.id.menu_item_delete_quantity:
                 burger.removeQuantity();
+                updatePrice(item2);
                 adapter.notifyDataSetChanged();
                 return true;
         }
@@ -141,9 +152,12 @@ public class CartListFragment extends ListFragment {
     }
 
 
-    /*
-        creates background thread
-         */
+
+
+
+    /**
+     * creates background thread
+     */
     private class FetchItemsTask extends AsyncTask<Void, Void, ArrayList<BurgersDogs>> {
         @Override
         protected ArrayList<BurgersDogs> doInBackground(Void... params) {
@@ -157,6 +171,7 @@ public class CartListFragment extends ListFragment {
             CartAdapter cartAdapter = new CartAdapter(getActivity().getApplicationContext(), R.layout.list_item_burgerdog, items);
             setListAdapter(cartAdapter);
             item2 = items;
+            updatePrice(item2);
 
         }
     }

@@ -3,7 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
+
     android:background="@drawable/background_activated">
 
     <TextView
@@ -15,6 +15,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:padding="5dp"
+        android:layout_marginLeft="5dp"
         android:textStyle="bold"
         android:textColor="#000000"
         android:ellipsize="end"
@@ -26,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/add_imageButton"
-        android:src="@drawable/sym_action_add"
+        android:src="@drawable/ic_add"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="10dp"
         android:focusable="false"/>

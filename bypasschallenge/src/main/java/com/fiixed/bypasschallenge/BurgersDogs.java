@@ -9,14 +9,7 @@ public class BurgersDogs {
     private double price;
 
     public BurgersDogs() {
-
-    }
-
-
-    public BurgersDogs(String title, int quantity, double price) {
-        this.title = title;
-        this.price = price;
-        this.quantity = quantity;
+        quantity = 3;
     }
 
     public String getTitle() {

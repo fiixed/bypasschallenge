@@ -25,7 +25,7 @@ public class JSONFetcher {
     private JSONObject burger;
 
 
-    /*
+    /**
     fetches raw data from a URL and returns it as an array of bytes
      */
     byte[] getUrlBytes(String urlSpec) throws IOException {
@@ -45,14 +45,14 @@ public class JSONFetcher {
             while((bytesRead = in.read(buffer)) > 0) {  //calls read until the connection runs out of data, InputStream yeilds bytes as they are available
                 out.write(buffer, 0, bytesRead);
             }
-            out.close();  //once data is finished we close the connection
-            return out.toByteArray();  //and return the ByteArrayOutputStream array
+            out.close();
+            return out.toByteArray();  //return the ByteArrayOutputStream array
         } finally {
             connection.disconnect();
         }
     }
 
-    /*
+    /**
     converts the result of getURLBytes into a string
      */
     public String getUrl(String urlSpec) throws IOException {
@@ -72,7 +72,7 @@ public class JSONFetcher {
         }
         return items;
     }
-    /*
+    /**
     json parsing and adding BurgersDogs objects to ArrayList
      */
     void parseItems(ArrayList<BurgersDogs> bypass) {

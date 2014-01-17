@@ -1,14 +1,12 @@
 package com.fiixed.bypasschallenge;
 
+import android.app.ListFragment;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -21,12 +19,18 @@ public class CartAdapter extends ArrayAdapter<BurgersDogs>  {
     Context mContext;
     int mLayoutResourceId;
     ArrayList<BurgersDogs> mData;
+    UpdatePriceListener updatePriceListener;
+
 
     public CartAdapter(Context context, int layoutResourceId, ArrayList<BurgersDogs> data) {
         super(context, layoutResourceId, data);
         this.mContext = context;
         this.mLayoutResourceId = layoutResourceId;
         this.mData = data;
+
+    }
+    public interface UpdatePriceListener {
+        public double updatePrice(ArrayList<BurgersDogs> mData);
     }
 
     @Override
@@ -88,11 +92,13 @@ public class CartAdapter extends ArrayAdapter<BurgersDogs>  {
     }
 
     View.OnClickListener AddListener = new View.OnClickListener() {
+
         @Override
         public void onClick(View v) {
-            Integer viewPosition = (Integer)v.getTag();
+            Integer viewPosition = (Integer) v.getTag();
             BurgersDogs b = mData.get(viewPosition);
             b.addQuantity();
+//            updatePriceListener.updatePrice(mData);
             notifyDataSetChanged();
         }
     };
