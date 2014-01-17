@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -25,10 +26,11 @@ import java.util.ArrayList;
 public class CartListFragment extends ListFragment implements CartAdapter.UpdatePriceListener {
 
     private static final String TAG = "CartListFragment";
-    protected ArrayList<BurgersDogs> item2;
+    protected ArrayList<BurgersDogs> myData = new ArrayList<BurgersDogs>();
     protected Object mActionMode;
     public int selectedItem = -1;
     private TextView costTextView;
+    CartAdapter cartAdapter;
 
 
 
@@ -45,6 +47,10 @@ public class CartListFragment extends ListFragment implements CartAdapter.Update
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.list_all_items, container, false);
+
+        //Setup ListView
+        cartAdapter = new CartAdapter(getActivity().getApplicationContext(), R.layout.list_item_burgerdog, myData, this);
+        setListAdapter(cartAdapter);
 
         costTextView = (TextView) v.findViewById(R.id.cost_textView);
 
@@ -79,13 +85,13 @@ public class CartListFragment extends ListFragment implements CartAdapter.Update
 
                                 @Override
                                 public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                                    CartAdapter adapter = (CartAdapter) getListAdapter();
-                                    BurgersDogs burger = adapter.getItem(selectedItem);
+                                    cartAdapter = (CartAdapter) getListAdapter();
+                                    BurgersDogs burger = cartAdapter.getItem(selectedItem);
                                     switch (item.getItemId()) {
                                         case R.id.menu_item_delete_quantity:
                                             burger.removeQuantity();
-                                            updatePrice(item2);
-                                            adapter.notifyDataSetChanged();
+                                            updatePrice(myData);
+                                            cartAdapter.notifyDataSetChanged();
                                             // the Action was executed, close the CAB
                                             mode.finish();
 
@@ -144,15 +150,12 @@ public class CartListFragment extends ListFragment implements CartAdapter.Update
         switch (item.getItemId()) {
             case R.id.menu_item_delete_quantity:
                 burger.removeQuantity();
-                updatePrice(item2);
+                updatePrice(myData);
                 adapter.notifyDataSetChanged();
                 return true;
         }
         return super.onContextItemSelected(item);
     }
-
-
-
 
 
     /**
@@ -167,11 +170,9 @@ public class CartListFragment extends ListFragment implements CartAdapter.Update
 
         @Override
         protected void onPostExecute(ArrayList<BurgersDogs> items) {  //run in the main UI thread, not the background
-            //Setup ListView
-            CartAdapter cartAdapter = new CartAdapter(getActivity().getApplicationContext(), R.layout.list_item_burgerdog, items);
-            setListAdapter(cartAdapter);
-            item2 = items;
-            updatePrice(item2);
+            myData = items;
+            cartAdapter.updateData(myData);
+
 
         }
     }

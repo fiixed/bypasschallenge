@@ -23,11 +23,14 @@ public class CartAdapter extends ArrayAdapter<BurgersDogs>  {
 
 
 
-    public CartAdapter(Context context, int layoutResourceId, ArrayList<BurgersDogs> data) {
+
+    public CartAdapter(Context context, int layoutResourceId, ArrayList<BurgersDogs> data, UpdatePriceListener upListener) {
         super(context, layoutResourceId, data);
         this.mContext = context;
         this.mLayoutResourceId = layoutResourceId;
         this.mData = data;
+        this.updatePriceListener = upListener;
+
 
 
     }
@@ -37,11 +40,16 @@ public class CartAdapter extends ArrayAdapter<BurgersDogs>  {
 
     @Override
     public BurgersDogs getItem(int position) {
-        return super.getItem(position);
+        return mData.get(position);
     }
 
     public int getCount() {
         return mData.size();
+    }
+
+    public void updateData(ArrayList<BurgersDogs> newDataSet) {
+        mData = newDataSet;
+        notifyDataSetChanged();
     }
 
     @Override
