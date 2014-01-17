@@ -22,11 +22,13 @@ public class CartAdapter extends ArrayAdapter<BurgersDogs>  {
     UpdatePriceListener updatePriceListener;
 
 
+
     public CartAdapter(Context context, int layoutResourceId, ArrayList<BurgersDogs> data) {
         super(context, layoutResourceId, data);
         this.mContext = context;
         this.mLayoutResourceId = layoutResourceId;
         this.mData = data;
+
 
     }
     public interface UpdatePriceListener {
@@ -98,7 +100,7 @@ public class CartAdapter extends ArrayAdapter<BurgersDogs>  {
             Integer viewPosition = (Integer) v.getTag();
             BurgersDogs b = mData.get(viewPosition);
             b.addQuantity();
-//            updatePriceListener.updatePrice(mData);
+            updatePriceListener.updatePrice(mData);
             notifyDataSetChanged();
         }
     };
