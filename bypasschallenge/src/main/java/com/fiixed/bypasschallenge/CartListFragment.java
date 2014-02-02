@@ -1,6 +1,7 @@
 package com.fiixed.bypasschallenge;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -39,8 +40,22 @@ public class CartListFragment extends ListFragment implements CartAdapter.Update
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActivity().setTitle(R.string.listfragment_title);
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(true);  //allows a fragment to populate the options menu
         new FetchItemsTask().execute();  //starts the AsyncTask and runs doInBackground()
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        //get the burger from the adapter
+        BurgersDogs burger = ((CartAdapter)getListAdapter()).getItem(position);
+
+        //Start DetailActivity
+        Intent i = new Intent(getActivity(), DetailActivity.class);
+        i.putExtra(DetailFragment.EXTRA_BURGERSDOGS_ID, burger.getId());
+        i.putExtra(DetailFragment.EXTRA_BURGERSDOGS_TITLE, burger.getTitle());
+        i.putExtra(DetailFragment.EXTRA_BURGERSDOGS_QUANTITY, burger.getPrice());
+        i.putExtra(DetailFragment.EXTRA_BURGERSDOGS_PRICE, burger.getPrice());
+        startActivity(i);
     }
 
     @TargetApi(11)
@@ -60,6 +75,7 @@ public class CartListFragment extends ListFragment implements CartAdapter.Update
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             registerForContextMenu(listView);
         } else {
+            //Implements contextual action mode
             listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -117,6 +133,10 @@ public class CartListFragment extends ListFragment implements CartAdapter.Update
         return v;
     }
 
+    /*
+    updates the total price whenever called
+     */
+
     public double updatePrice(ArrayList<BurgersDogs> item) {
         double total = 0.0;
 
@@ -130,6 +150,9 @@ public class CartListFragment extends ListFragment implements CartAdapter.Update
     }
 
 
+    /**
+     * Creates contextual menu
+     */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         getActivity().getMenuInflater().inflate(R.menu.cart_list_item_context, menu);

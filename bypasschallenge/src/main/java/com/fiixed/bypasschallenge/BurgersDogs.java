@@ -1,5 +1,7 @@
 package com.fiixed.bypasschallenge;
 
+import java.util.UUID;
+
 /**
  * Created by abell on 1/16/14.
  */
@@ -7,9 +9,14 @@ public class BurgersDogs {
     private String title;
     private int quantity;
     private double price;
+    private UUID mId;  //NEW
 
     public BurgersDogs() {
+        mId = UUID.randomUUID();  //NEW
+    }
 
+    public UUID getId() {
+        return mId;
     }
 
     public String getTitle() {

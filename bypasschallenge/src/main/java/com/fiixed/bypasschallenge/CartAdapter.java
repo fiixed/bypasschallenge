@@ -101,6 +101,8 @@ public class CartAdapter extends ArrayAdapter<BurgersDogs>  {
         return row;
     }
 
+
+    //button click listener
     View.OnClickListener AddListener = new View.OnClickListener() {
 
         @Override

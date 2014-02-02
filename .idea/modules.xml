@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BypassChallenge.iml" filepath="$PROJECT_DIR$/BypassChallenge.iml" />
       <module fileurl="file://$PROJECT_DIR$/bypasschallenge/bypasschallenge.iml" filepath="$PROJECT_DIR$/bypasschallenge/bypasschallenge.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bypasschallenge/bypasschallenge-bypasschallenge.iml" filepath="$PROJECT_DIR$/bypasschallenge/bypasschallenge-bypasschallenge.iml" />
     </modules>
   </component>
 </project>
